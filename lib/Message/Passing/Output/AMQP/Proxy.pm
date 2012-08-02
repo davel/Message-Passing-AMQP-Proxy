@@ -1,17 +1,10 @@
-package Message::Passing::Output::AMQP;
+package Message::Passing::Output::AMQP::Proxy;
 use Moose;
 use namespace::autoclean;
 
 with qw/
-    Message::Passing::AMQP::Role::DeclaresExchange
     Message::Passing::Role::Output
 /;
-
-has routing_key => (
-    isa => 'Str',
-    is => 'ro',
-    default => '',
-);
 
 sub consume {
     my $self = shift;
@@ -26,8 +19,8 @@ sub consume {
     }
     $self->_channel->publish(
         body => $data,
-        exchange => $self->exchange_name,
-        routing_key => $self->routing_key,
+        exchange => $data->{'@exchange'},
+        routing_key => $data->{'@rk'},
     );
 }
 
@@ -36,11 +29,11 @@ __PACKAGE__->meta->make_immutable;
 
 =head1 NAME
 
-Message::Passing::Output::AMQP - output messages to AMQP.
+Message::Passing::Output::AMQP::Proxy - output messages to AMQP.
 
 =head1 SYNOPSIS
 
-    message-pass --input STDIN --output AMQP --output_options '{"exchange_name":"test","hostname":"127.0.0.1","username":"guest","password":"guest"}'
+    message-pass --input STDIN --output AMQP::Proxy --output_options '{"exchange_name":"test","hostname":"127.0.0.1","username":"guest","password":"guest"}'
 
 =head1 DESCRIPTION
 
@@ -48,6 +41,8 @@ A L<Message::Passing> L<AnyEvent::RabbitMQ> output class.
 
 Can be used as part of a chain of classes with the L<message-pass> utility, or directly as
 a logger in normal perl applications.
+
+Takes the routeing key and exchange from the C<@rk> and C<@exchange> fields.
 
 =head1 METHODS
 
@@ -61,7 +56,7 @@ Sends a message.
 
 =item L<Message::Passing::AMQP>
 
-=item L<Message::Passing::Input::AMQP>
+=item L<Message::Passing::Output::AMQP>
 
 =item L<Message::Passing>
 
@@ -73,7 +68,7 @@ Sends a message.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
-See L<Message::Passing::AMQP>.
+See L<Message::Passing::AMQP::Proxy>.
 
 =cut
 

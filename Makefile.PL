@@ -3,11 +3,11 @@ use warnings;
 use inc::Module::Install;
 use Module::Install::Authority;
 
-all_from 'lib/Message/Passing/AMQP.pm';
-authority('GHENRY');
-resources(
-    repository => "git://github.com/suretec/Message-Passing-AMQP.git",
-);
+all_from 'lib/Message/Passing/AMQP::Proxy.pm';
+#authority('GHENRY');
+#resources(
+#    repository => "git://github.com/suretec/Message-Passing-AMQP.git",
+#);
 
 license 'AGPL_3';
 
@@ -20,6 +20,7 @@ requires 'JSON::XS';
 requires 'Try::Tiny';
 requires 'Task::Weaken';
 requires 'Message::Passing' => '0.009';
+requires 'Message::Passing::AMQP' => '0.003';
 
 test_requires 'Test::More' => '0.88';
 
@@ -35,7 +36,7 @@ author_requires(
 author_tests 't/author';
 
 if ($Module::Install::AUTHOR) {
-    system("pod2text lib/Message/Passing/AMQP.pm > README")
+    system("pod2text lib/Message/Passing/AMQP::Proxy.pm > README")
         and die $!;
 }
 
