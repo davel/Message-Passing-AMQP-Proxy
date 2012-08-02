@@ -1,6 +1,7 @@
 package Message::Passing::Output::AMQP::Proxy;
 use Moose;
 use namespace::autoclean;
+use JSON qw/ decode_json /;
 
 with qw/
     Message::Passing::Role::Output
@@ -13,14 +14,13 @@ sub consume {
         warn("Passed non-serialized data - is a perl reference. Dropping.\n");
         return;
     }
-    unless ($self->_exchange) {
-        warn("No exchange yet, dropping message");
-        return;
-    }
+
+    my $hash = decode_json($data);
+
     $self->_channel->publish(
         body => $data,
-        exchange => $data->{'@exchange'},
-        routing_key => $data->{'@rk'},
+        exchange => $has->{'@exchange'},
+        routing_key => $hash->{'@rk'},
     );
 }
 
