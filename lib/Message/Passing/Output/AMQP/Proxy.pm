@@ -4,6 +4,7 @@ use namespace::autoclean;
 use JSON qw/ decode_json /;
 
 with qw/
+    Message::Passing::AMQP::Role::HasAChannel
     Message::Passing::Role::Output
 /;
 
