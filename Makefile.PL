@@ -1,9 +1,8 @@
 use strict;
 use warnings;
 use inc::Module::Install;
-use Module::Install::Authority;
 
-all_from 'lib/Message/Passing/AMQP::Proxy.pm';
+all_from 'lib/Message/Passing/AMQP/Proxy.pm';
 #authority('GHENRY');
 #resources(
 #    repository => "git://github.com/suretec/Message-Passing-AMQP.git",
@@ -33,10 +32,10 @@ author_requires(
     'Test::Spelling' => '0',
 );
 
-author_tests 't/author';
+# author_tests 't/author';
 
 if ($Module::Install::AUTHOR) {
-    system("pod2text lib/Message/Passing/AMQP::Proxy.pm > README")
+    system("pod2text lib/Message/Passing/AMQP/Proxy.pm > README")
         and die $!;
 }
 
