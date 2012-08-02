@@ -19,7 +19,7 @@ sub consume {
 
     $self->_channel->publish(
         body => $data,
-        exchange => $has->{'@exchange'},
+        exchange => $hash->{'@exchange'},
         routing_key => $hash->{'@rk'},
     );
 }
