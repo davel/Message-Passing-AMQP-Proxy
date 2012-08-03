@@ -1,15 +1,5 @@
-0.003
-  - Use core Message::Passing::Role::HasHostnameAndPort
-  - Use core Message::Passing::Role::HasUsernameAndPassword
-  - username, password, hostname attributes no longer default
-    to a values, and must be user supplied.
-
 0.002
-  - Fix SYNOPSIS in documentation.
-  - Add timeouts to tests to avoid hangs when they fail.
-  - Fix for latest version of Message::Passing.
-  - Emit warnings if output is a perl ref (i.e. hasn't
-    been correctly serialized/encoded)
+  - Correct package names and documentation.
 
 0.001
   - Initial barely working version
