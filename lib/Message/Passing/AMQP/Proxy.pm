@@ -9,11 +9,11 @@ $VERSION = eval $VERSION;
 
 =head1 NAME
 
-Message::Passing::AMQP
+Message::Passing::AMQP::Proxy
 
 =head1 SYNOPSIS
 
-    $ message-pass --input STDIN --output AMQP --output_options '{"hostname":"127.0.0.1","username":"guest","password":"guest"}'
+    $ message-pass --input STDIN --output AMQP::Proxy --output_options '{"hostname":"127.0.0.1","username":"guest","password":"guest"}'
     {"data":{"some":"data"},"@metadata":"value"}
 
 =head1 DESCRIPTION
